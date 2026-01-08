@@ -24,7 +24,7 @@ const io = socketIO(server, {
 // 2. Configuración de CORS para Express (Vital para el Login)
 app.use(cors({
   origin: ["http://localhost:4200", "http://localhost:8100"],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // <--- Agregamos PATCH aquí
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
