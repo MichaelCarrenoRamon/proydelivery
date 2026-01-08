@@ -10,16 +10,12 @@ const { sendPushNotification } = require('../config/firebase');
 // @access  Private
 exports.crearPedido = async (req, res) => {
   try {
-    const nuevoPedido = new Pedido({
-      ...req.body,
-      clienteId: req.usuario.id // Obtenido del token JWT
-    });
-    const pedidoGuardado = await nuevoPedido.save();
-    
-    // Aquí podrías emitir un evento de Socket.io para avisar al Admin en tiempo real
-    res.status(201).json({ success: true, data: pedidoGuardado });
+    const nuevoPedido = new Pedido(req.body);
+    await nuevoPedido.save();
+    res.status(201).json(nuevoPedido);
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    console.error("DETALLE DEL ERROR:", error); // ESTO TE DIRÁ QUÉ PASA
+    res.status(500).json({ message: error.message });
   }
 };
 
